@@ -6,6 +6,11 @@ const { fetchUser, vendorList, fetchVendors } = require('../../database/mockdata
 
 
 // Resolvers define the technique for fetching the types defined in the schema.
+interface UserInterface {
+    name: string
+    email: string
+    password: string
+}
 
 interface TokenPayloadInterface {
     name: string,
@@ -54,14 +59,14 @@ export const resolvers = {
     },
     Mutation: {
         login: async (parent: any, args: any, context: any, info: any) => {
-            const users = await fetchUser();
-            const user = users.find((user: any) => user.email === args.email && user.password === args.password);
+            const users: Array<UserInterface> = await fetchUser();
+            const user = users.find((user: UserInterface) => user.email === args.email && user.password === args.password);
 
             // const isMatch = await comparePassword(args.password, user.password)
             
             if (user) {
                 const token = getToken(user)
-                return { ...user, token };
+                return { email: user.email, name: user.name,  token };
             } else {
                 throw new AuthenticationError("Wrong Password!")
             }
@@ -75,6 +80,18 @@ export const resolvers = {
             }
             vendorList.push(vendor);
             return vendor;
+        },
+        async createUser(parent: undefined, args: UserInterface, ctx: any, info: any) {
+            const user: UserInterface & {id: string} = {
+                id: uuid(),
+                name: args.name,
+                email: args.email,
+                password: args.password
+            }
+            const users: Array<UserInterface> = await fetchUser();
+            users.push(user);
+            
+            return user;
         }
     }
 };
