@@ -1,5 +1,4 @@
 import { v4 as uuid } from 'uuid'
-import { users } from '../../database/mockdata';
 const { getToken } = require("../util")
 const { AuthenticationError } = require('apollo-server');
 const { fetchUser, vendorList, fetchVendors } = require('../../database/mockdata');
@@ -10,13 +9,6 @@ interface UserInterface {
     name: string
     email: string
     password: string
-}
-
-interface TokenPayloadInterface {
-    name: string,
-    email: string,
-    iat: number,
-    exp: number
 }
 
 interface VendorInterface {
@@ -90,7 +82,7 @@ export const resolvers = {
             }
             const users: Array<UserInterface> = await fetchUser();
             users.push(user);
-            
+
             return user;
         }
     }
