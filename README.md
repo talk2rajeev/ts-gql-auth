@@ -94,6 +94,7 @@ variables
 ```
 
 ## setup vscode debugger
+.vscode/launch.json
 ```
 {
     // Use IntelliSense to learn about possible attributes.
