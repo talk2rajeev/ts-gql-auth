@@ -66,6 +66,32 @@ query Users {
 }
 ```
 
+## Advance GQL 
+#### Default variables
+`query Users($showVendor: Boolean! = false)`
+We can assign default value to the variables in the query.
+
+#### Directives
+`@include(if: Boolean)` Only include this field in the result if the argument is true.
+`@skip(if: Boolean)` Skip this field if the argument is true.
+Example 
+```
+query Users($showVendor: Boolean! = false) { //we can also assign default value to variable
+  users {
+    email
+    name
+  }
+  vendors  @include(if: $showVendor) {
+    name
+    address
+    type
+  }
+}
+variables 
+{
+    showVendor: true
+}
+```
 
 ## setup vscode debugger
 ```
