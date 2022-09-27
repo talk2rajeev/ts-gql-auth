@@ -1,6 +1,6 @@
 # ts-gql-auth
 It is a GraphQL and JWT token based authentication application. It is developed using apollo-server, TypeScript and JWT.
-I have used mock Database (a simple async function and local variable to store data to in-memory) which can be replaced by any
+I have used mock Database (a simple async function and local variable to store data in-memory) which can be replaced by any
 other database like rdbms or nosql.
 
 
