@@ -6,7 +6,10 @@ other database like rdbms or nosql.
 
 ## How to run
 #### install
-`yarn` or `npm install`
+`yarn` 
+or 
+`npm install`
+
 #### run
 `yarn dev` or `npm run dev`
 
